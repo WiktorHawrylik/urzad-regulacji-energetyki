@@ -6,10 +6,8 @@ Dziękujemy za zainteresowanie wkładem w ten projekt! Ten dokument opisuje nasz
 
 ### Kod
 
-- **Style**: Stosujemy [PEP 8](https://www.python.org/dev/peps/pep-0008/) z wyjątkami określonymi przez black
-- **Formatowanie**: Kod jest formatowany za pomocą [black](https://github.com/psf/black) z długością linii 120
-- **Import sorty**: Używamy [isort](https://github.com/PyCPA/isort) z profilem kompatybilnym z black
-- **Linting**: Wymagany [flake8](https://flake8.pycqa.org/) bez błędów
+- **Style**: Stosujemy [PEP 8](https://www.python.org/dev/peps/pep-0008/)
+- **Formatowanie i linting**: Używamy [ruff](https://github.com/astral-sh/ruff) do formatowania i lintingu kodu
 - **Type hints**: Wszystkie funkcje publiczne muszą mieć type hints; mypy sprawdza to z opcją `strict`
 - **Testy**: Kod powinien być pokryty testami (minimum 80% pokrycia)
 
@@ -130,9 +128,7 @@ Projekt używa **`pyproject.toml` jako jedynego źródła konfiguracji** dla wsz
 #### 📋 Wszystkie reguły w `pyproject.toml`
 
 ```toml
-[tool.black]          # Formatowanie kodu
-[tool.isort]          # Sortowanie importów
-[tool.flake8]         # Linting
+[tool.ruff]           # Formatowanie i linting
 [tool.mypy]           # Sprawdzanie typów
 [tool.pytest.ini_options]  # Testy
 [tool.coverage.run]   # Pokrycie kodu
@@ -148,7 +144,7 @@ Minimalna konfiguracja VS Code bez zakodowanych ścieżek:
 {
   "editor.formatOnSave": true,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "charliermarsh.ruff"
   }
 }
 ```
@@ -158,12 +154,11 @@ Minimalna konfiguracja VS Code bez zakodowanych ścieżek:
 Wszystkie narzędzia uruchamiane przez `uv run`:
 
 ```bash
-# Formatowanie
-uv run black .
-uv run isort .
+# Formatowanie i linting
+uv run ruff check --fix .
+uv run ruff format .
 
-# Sprawdzanie jakości
-uv run flake8 src tests
+# Sprawdzanie typów
 uv run mypy src
 
 # Testy
@@ -201,8 +196,7 @@ uv run pre-commit install
 ```
 
 **Co zostanie zainstalowane**:
-- `black`, `isort` - formatowanie
-- `flake8` + `flake8-pyproject` - linting (plugin dla pyproject.toml)
+- `ruff` - formatowanie i linting (zastępuje black, isort, flake8)
 - `mypy` - sprawdzanie typów
 - `pytest` - testy
 - `pre-commit` - git hooks

@@ -8,7 +8,7 @@ help:
 	@echo "  test           - Run tests"
 	@echo "  test-cov       - Run tests with coverage report"
 	@echo "  lint           - Run all code quality checks"
-	@echo "  format         - Format code with black and isort"
+	@echo "  format         - Format code with ruff"
 	@echo "  format-check   - Check code formatting without modifying"
 	@echo "  clean          - Clean build artifacts and caches"
 	@echo "  docs           - Build documentation"
@@ -28,19 +28,17 @@ test-cov:
 
 lint:
 	@echo "Running code quality checks..."
-	uv run black --check --diff src tests
-	uv run isort --check-only --diff src tests
-	uv run flake8 src tests
+	uv run ruff check src tests
+	uv run ruff format --check src tests
 	uv run mypy src
 
 format:
 	@echo "Formatting code..."
-	uv run black src tests
-	uv run isort src tests
+	uv run ruff check --fix src tests
+	uv run ruff format src tests
 
 format-check:
-	uv run black --check src tests
-	uv run isort --check-only src tests
+	uv run ruff format --check src tests
 
 clean:
 	@echo "Cleaning build artifacts and caches..."

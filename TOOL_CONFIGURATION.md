@@ -5,9 +5,7 @@ This project uses **`pyproject.toml` as the single source of configuration** for
 ## Philosophy: Single Source of Truth
 
 All tool configurations live in `pyproject.toml`:
-- ✅ Black (formatter)
-- ✅ isort (import sorter)
-- ✅ flake8 (linter)
+- ✅ ruff (formatter and linter - replaces black, isort, flake8)
 - ✅ mypy (type checker)
 - ✅ pytest (test framework)
 - ✅ coverage (code coverage)
@@ -19,19 +17,16 @@ All tool configurations live in `pyproject.toml`:
 ### `pyproject.toml` - All Tool Settings
 
 ```toml
-[tool.black]
+[tool.ruff]
 line-length = 120
-target-version = ['py39', 'py310', 'py311', 'py312']
+target-version = "py39"
 
-[tool.isort]
-profile = "black"
-line_length = 120
-src_paths = ["src", "tests"]
+[tool.ruff.lint]
+select = ["E", "F", "I", "C90"]
+ignore = ["E203", "W503"]
 
-[tool.flake8]
-max-line-length = 120
-extend-ignore = ["E203", "W503"]
-max-complexity = 10
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.mypy]
 python_version = "3.9"
@@ -55,7 +50,7 @@ Minimal VS Code configuration without hardcoded paths:
 {
   "editor.formatOnSave": true,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "python.testing.pytestEnabled": true
 }
@@ -66,14 +61,13 @@ Minimal VS Code configuration without hardcoded paths:
 All tools are run via `uv run` and auto-discover `pyproject.toml`:
 
 ```bash
-# Format code
-uv run black .
-uv run isort .
+# Format and lint code
+uv run ruff check --fix .
+uv run ruff format .
 
 # Check code quality
-uv run black --check .
-uv run isort --check-only .
-uv run flake8 src tests
+uv run ruff check .
+uv run ruff format --check .
 uv run mypy src
 
 # Run tests
@@ -99,11 +93,9 @@ Modern Python tools follow **PEP 518** and search for `pyproject.toml`:
 
 ### Tool-Specific Notes:
 
-- **Black**: Native `pyproject.toml` support ✅
-- **isort**: Native support since v5.0 ✅
+- **ruff**: Native `pyproject.toml` support, 10-100x faster than black/isort/flake8 ✅
 - **mypy**: Native support since v0.900 ✅
 - **pytest**: Native support since v6.0 ✅
-- **flake8**: Requires `flake8-pyproject>=1.2.0` plugin ⚠️
 
 ## Installation
 
@@ -116,7 +108,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh  # Linux/macOS
 # Install project with all dev dependencies
 uv sync --extra dev --extra test --extra docs
 
-# This installs black, isort, flake8 (+ plugin), mypy, pytest
+# This installs ruff, mypy, pytest
 # All configured via pyproject.toml
 ```
 
@@ -125,14 +117,11 @@ uv sync --extra dev --extra test --extra docs
 `.pre-commit-config.yaml` runs tools without inline args:
 
 ```yaml
-- repo: https://github.com/psf/black
+- repo: https://github.com/astral-sh/ruff-pre-commit
   hooks:
-    - id: black  # Reads from pyproject.toml
-
-- repo: https://github.com/pycqa/flake8
-  hooks:
-    - id: flake8
-      additional_dependencies: [flake8-pyproject]  # Enables pyproject.toml
+    - id: ruff
+      args: [--fix]
+    - id: ruff-format
 ```
 
 ## CI/CD Integration
@@ -151,13 +140,10 @@ GitHub Actions example:
 - name: Install dependencies
   run: uv sync --extra dev --extra test
 
-- name: Check formatting
+- name: Check formatting and lint
   run: |
-    uv run black --check .
-    uv run isort --check-only .
-
-- name: Lint
-  run: uv run flake8 src tests
+    uv run ruff check .
+    uv run ruff format --check .
 
 - name: Type check
   run: uv run mypy src
