@@ -247,14 +247,8 @@ make docs
 
 2. **Instalacja uv** (jeśli jeszcze nie zainstalowane):
    ```bash
-   # Linux/macOS
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-
    # macOS (Homebrew)
    brew install uv
-
-   # Windows
-   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
    ```
 
 3. **Instalacja projektu i zależności**:
@@ -291,12 +285,6 @@ Wszystkie narzędzia używają **`pyproject.toml`** jako pojedynczego źródła 
 
 Szczegóły konfiguracji w [TOOL_CONFIGURATION.md](TOOL_CONFIGURATION.md).
 
-**Dlaczego uv?**
-- ⚡ 10-100x szybszy niż pip
-- 🔒 Lockfile dla reprodukowalnych instalacji
-- 🧰 Automatyczne zarządzanie środowiskami wirtualnymi
-- 📦 Jedna komenda do wszystkiego: `uv sync`
-
 ### Wkład
 
 Ten projekt podąża za strategią gałęziowania **Git Flow** dla zorganizowanego rozwoju i wydań. Zobacz [CONTRIBUTING.md](CONTRIBUTING.md) aby uzyskać szczegółowe instrukcje dotyczące przepływu pracy, konwencji nazewnictwa gałęzi i procesu przesyłania.
@@ -309,6 +297,7 @@ Ten projekt jest licencjonowany na warunkach licencji GPL-3.0 - zobacz plik [LIC
 
 - **Problemy**: [GitHub Issues](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/issues)
 - **Dyskusje**: [GitHub Discussions](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/discussions)
+- **Autor**: Wiktor Hawrylik
 - **Email**: <wiktor.hawrylik@gmail.com>
 
 ## 📈 Plan Rozwoju
