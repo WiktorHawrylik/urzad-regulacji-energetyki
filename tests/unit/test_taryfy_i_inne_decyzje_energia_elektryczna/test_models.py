@@ -1,6 +1,5 @@
 """Unit tests for the models module."""
 
-
 from urzad_regulacji_energetyki.taryfy_i_inne_decyzje_energia_elektryczna.models import Tariff, TariffType
 
 

@@ -123,6 +123,65 @@ Projekt podąża za strategią [Git Flow](https://nvie.com/posts/a-successful-gi
 
 ## Ustawienia Lokalne
 
+### Konfiguracja Narzędzi - Pojedyncze Źródło Prawdy
+
+Projekt używa **`pyproject.toml` jako jedynego źródła konfiguracji** dla wszystkich narzędzi deweloperskich.
+
+#### 📋 Wszystkie reguły w `pyproject.toml`
+
+```toml
+[tool.black]          # Formatowanie kodu
+[tool.isort]          # Sortowanie importów
+[tool.flake8]         # Linting
+[tool.mypy]           # Sprawdzanie typów
+[tool.pytest.ini_options]  # Testy
+[tool.coverage.run]   # Pokrycie kodu
+```
+
+Wszystkie narzędzia **automatycznie odkrywają** `pyproject.toml` - nie trzeba przekazywać argumentów `--config`.
+
+#### ⚙️ `.vscode/settings.json` - Tylko zachowanie edytora
+
+Minimalna konfiguracja VS Code bez zakodowanych ścieżek:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}
+```
+
+### Uruchamianie Narzędzi
+
+Wszystkie narzędzia uruchamiane przez `uv run`:
+
+```bash
+# Formatowanie
+uv run black .
+uv run isort .
+
+# Sprawdzanie jakości
+uv run flake8 src tests
+uv run mypy src
+
+# Testy
+uv run pytest
+
+# Lub skróty Makefile
+make format      # Formatuj kod
+make lint        # Sprawdź jakość
+make test        # Uruchom testy
+make test-cov    # Testy z pokryciem
+```
+
+**Dlaczego `uv run`?**
+- Automatycznie używa prawid\u0142owego środowiska wirtualnego
+- 10-100x szybszy niż pip
+- Działa na Windows/Linux/macOS
+- Reprodukowalne instalacje z lockfile
+
 ### Setup i Instalacja
 
 ```bash
@@ -130,17 +189,25 @@ Projekt podąża za strategią [Git Flow](https://nvie.com/posts/a-successful-gi
 git clone https://github.com/twoja-nazwa/urzad-regulacji-energetyki.git
 cd urzad-regulacji-energetyki
 
-# macOS z pyenv (rekomendowane)
-./setup_dev_macos.sh
+# Instalacja uv (jeśli nie zainstalowane)
+curl -LsSf https://astral.sh/uv/install.sh | sh  # Linux/macOS
+# Lub: brew install uv  # macOS Homebrew
 
-# Linux/Windows
-./setup_dev.sh
+# Instalacja projektu z wszystkimi zależnościami
+uv sync --extra dev --extra test --extra docs
 
-# Lub ręcznie
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-make install-dev
+# Instalacja pre-commit hooks
+uv run pre-commit install
 ```
+
+**Co zostanie zainstalowane**:
+- `black`, `isort` - formatowanie
+- `flake8` + `flake8-pyproject` - linting (plugin dla pyproject.toml)
+- `mypy` - sprawdzanie typów
+- `pytest` - testy
+- `pre-commit` - git hooks
+
+
 
 ### Komendy Deweloperskie
 

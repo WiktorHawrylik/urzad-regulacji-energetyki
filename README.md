@@ -32,6 +32,10 @@ To repozytorium zawiera 3 specjalistyczne moduły Pythona do analizy rynku energ
 
 ### Z PyPI (rekomendowane)
 ```bash
+# Using uv (fastest)
+uv pip install urzad-regulacji-energetyki
+
+# Or using pip
 pip install urzad-regulacji-energetyki
 ```
 
@@ -39,16 +43,29 @@ pip install urzad-regulacji-energetyki
 ```bash
 git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
 cd urzad-regulacji-energetyki
+
+# Using uv (recommended)
+uv pip install -e .
+
+# Or using pip
 pip install -e .
 ```
 
 ### Instalacja dla deweloperów
 
-#### MacOS z pyenv (rekomendowane dla macOS)
 ```bash
 git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
 cd urzad-regulacji-energetyki
-./setup_dev_macos.sh
+
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh  # Linux/macOS
+# Or on macOS with Homebrew: brew install uv
+
+# Install project with all dev dependencies
+uv sync --extra dev --extra test --extra docs
+
+# Install pre-commit hooks
+uv run pre-commit install
 ```
 
 ## 🔧 Szybki Start
@@ -130,33 +147,43 @@ Uruchom testy za pomocą pytest:
 ```bash
 # Uruchom wszystkie testy
 make test
+# Or: uv run pytest
 
 # Uruchom z pokryciem kodu
-pytest --cov=urzad_regulacji_energetyki
+make test-cov
+# Or: uv run pytest --cov=urzad_regulacji_energetyki --cov-report=html
 
 # Uruchom konkretny plik testowy
-pytest tests/unit/test_tariff_analyzer.py
-
-# Uruchom testy na wszystkich wersjach Pythona
-make test-all
+uv run pytest tests/unit/test_tariff_analyzer.py
 ```
 
-## 🔍 Jakość kodu
+**Testowanie wielu wersji Pythona**: CI/CD automatycznie testuje na Python 3.9, 3.10, 3.11, 3.12 w GitHub Actions.
 
-Ten projekt utrzymuje wysokie standardy jakości kodu:
+## 🔍 Jakość Kodu
+
+Projekt używa **`pyproject.toml` jako pojedynczego źródła konfiguracji** dla wszystkich narzędzi:
 
 ```bash
-# Formatowanie kodu
+# Formatowanie kodu (black + isort)
 make format
+# Or: uv run black src tests && uv run isort src tests
 
-# Linting
+# Sprawdzanie jakości (black, isort, flake8, mypy)
 make lint
 
-# Sprawdzanie typów
-mypy src
+# Lub uruchom narzędzia bezpośrednio
+uv run black src tests
+uv run isort src tests
+uv run flake8 src tests
+uv run mypy src
+```
 
-# Pre-commit hooks
+**Konfiguracja**: Wszystkie narzędzia automatycznie czytają z `pyproject.toml` - nie potrzeba przekazywać argumentów `--config`.
+
+**Pre-commit hooks**: Zainstaluj hooks aby automatycznie sprawdzać kod przed każdym commitem:
+```bash
 make pre-commit
+# Or: uv run pre-commit install
 ```
 
 ## 📚 Dokumentacja
@@ -168,23 +195,7 @@ make docs
 
 ## 🛠️ Środowisko Deweloperskie
 
-### Szybka konfiguracja (Rekomendowane)
-
-Dla **użytkowników macOS z pyenv**:
-```bash
-git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
-cd urzad-regulacji-energetyki
-./setup_dev_macos.sh
-```
-
-Dla **użytkowników Linux/Windows**:
-```bash
-git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
-cd urzad-regulacji-energetyki
-./setup_dev.sh
-```
-
-### Konfiguracja ręczna
+### Konfiguracja (Python 3.9+)
 
 1. **Klonowanie repozytorium**:
    ```bash
@@ -192,21 +203,59 @@ cd urzad-regulacji-energetyki
    cd urzad-regulacji-energetyki
    ```
 
-2. **Tworzenie środowiska wirtualnego**:
+2. **Instalacja uv** (jeśli jeszcze nie zainstalowane):
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Na Windows: venv\Scripts\activate
+   # Linux/macOS
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+
+   # macOS (Homebrew)
+   brew install uv
+
+   # Windows
+   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
    ```
 
-3. **Instalacja zależności deweloperskich**:
+3. **Instalacja projektu i zależności**:
    ```bash
-   make install-dev
+   uv sync --extra dev --extra test --extra docs
    ```
 
 4. **Instalacja pre-commit hooks**:
    ```bash
-   make pre-commit
+   uv run pre-commit install
    ```
+
+### Dostępne Komendy Make
+
+```bash
+make help          # Pokaż wszystkie dostępne komendy
+make install-dev   # Zainstaluj zależności deweloperskie
+make format        # Sformatuj kod (black + isort)
+make lint          # Sprawdź jakość kodu
+make test          # Uruchom testy
+make test-cov      # Uruchom testy z raportem pokrycia
+make clean         # Wyczyść artefakty
+make docs          # Zbuduj dokumentację
+```
+
+### Narzędzia Deweloperskie
+
+Wszystkie narzędzia używają **`pyproject.toml`** jako pojedynczego źródła konfiguracji:
+
+- **uv**: Szybki menedżer pakietów i środowisk Python
+- **Black**: formatowanie kodu (line-length: 120)
+- **isort**: sortowanie importów (kompatybilne z black)
+- **flake8**: linting (wymaga `flake8-pyproject`)
+- **mypy**: sprawdzanie typów (strict mode)
+- **pytest**: testy i pokrycie kodu
+
+Szczegóły konfiguracji w [TOOL_CONFIGURATION.md](TOOL_CONFIGURATION.md).
+
+**Dlaczego uv?**
+- ⚡ 10-100x szybszy niż pip
+- 🔒 Lockfile dla reprodukowalnych instalacji
+- 🧰 Automatyczne zarządzanie środowiskami wirtualnymi
+- 📦 Jedna komenda do wszystkiego: `uv sync`
 
 ### Wkład
 
