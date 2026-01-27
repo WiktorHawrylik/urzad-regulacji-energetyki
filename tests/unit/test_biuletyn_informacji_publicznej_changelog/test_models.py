@@ -1,6 +1,5 @@
 """Unit tests for the models module."""
 
-
 from urzad_regulacji_energetyki.biuletyn_informacji_publicznej_changelog.models import BulletinChange, ChangeType
 
 

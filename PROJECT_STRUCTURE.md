@@ -40,7 +40,10 @@ urzad-regulacji-energetyki/
 │   └── integration/
 │       └── test_full_workflow.py
 ├── docs/                       # Dokumentacja (do utworzenia)
-├── .github/                    # GitHub konfiguracja
+├── scripts/
+│   └── bash/
+│       ├── setup_dev_macos.sh  # Setup script dla macOS
+│       └── verify_config.sh    # Weryfikacja konfiguracji
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
@@ -50,9 +53,6 @@ urzad-regulacji-energetyki/
 ├── Makefile                    # Build targets
 ├── README.md                   # Dokumentacja główna (po polsku)
 ├── pyproject.toml              # Konfiguracja projektu
-├── setup_dev_macos.sh          # Setup script dla macOS
-├── setup_dev.sh                # Setup script dla Linux/Windows
-├── tox.ini                     # Konfiguracja tox
 └── .codecov.yml                # Konfiguracja code coverage
 ```
 
@@ -206,7 +206,7 @@ pytest tests/unit/test_rejestr_mioze/test_models.py
 
 2. **Setup (macOS)**:
    ```bash
-   ./setup_dev_macos.sh
+   ./scripts/bash/setup_dev_macos.sh
    ```
 
 3. **Instalacja zależności**:

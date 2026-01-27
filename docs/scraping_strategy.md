@@ -1,5 +1,9 @@
-Skip to content
-You said:
+# BIP URE Web Scraping Strategy
+
+> **Source:** ChatGPT conversation
+> **Date:** January 2026
+
+## Question
 
 analyze this website throughoutly and tell me what is the most effective way to scrap it to create any of below:
 
@@ -51,9 +55,9 @@ analyze this website throughoutly and tell me what is the most effective way to 
   - Market trend analysis
   - Result forecasting
   - Historical auction data
-ChatGPT said:
 
-Thought for 47s
+## Analysis
+
 Here’s what this site actually is and how to scrape it efficiently for the modules you listed.
 
 1) What you’re dealing with (BIP URE)
@@ -244,10 +248,15 @@ the entities/fields you should normalize into your database,
 
 and the incremental update logic (including how to use the change log for that module).
 
-You said:
+
+---
+
+## Follow-up Question
 
 what dta has regular weekly updates?
-ChatGPT said:
+
+## Answer
+
 Here’s what on this BIP – Urząd Regulacji Energetyki website actually updates regularly — meaning it changes often enough (weekly or more) that you should scrape it incrementally.
 
 ✅ 1) Tariffs & Other Decisions (Taryfy i inne decyzje)
@@ -413,10 +422,15 @@ target_url
 
 If you want, I can draft ready-to-run scraping rules (CSS selectors + extraction logic for each target section) for your first module of choice — just tell me which one you want to build first.
 
-You said:
+
+---
+
+## Follow-up Question
 
 draft ready-to-run scraping rules
-ChatGPT said:
+
+## Answer
+
 Below are ready-to-run scraping rules for this BIP URE site, built around the two highest-yield sources:
 
 Tariff list pages like the one you’re on (table of PDFs + dates + descriptions)
@@ -766,8 +780,3 @@ date: regex dd.mm.yyyy in row text
 action: keyword contains modyfik / opublik / odpublik / usun
 
 If you tell me which other sections you want included next (gas / heat / liquid fuels / auctions / registries), I’ll extend start_urls + add dedicated spiders with exact selectors for those page layouts.
-
-DEVELOPER MODE
-
-Taryfy opublikowane w 2026 r. - Energia elektryczna - BIP - Urząd Regulacji Energetyki
-No file chosenNo file chosen
