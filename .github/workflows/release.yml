@@ -21,17 +21,17 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Build package
+      - name: Build distribution packages
         run: |
           uv build
 
-      - name: Check package
+      - name: Verify package integrity (in an isolated, temporary environment)
         run: |
-          uv run twine check dist/*
+          uv tool run twine check dist/*
 
-      - name: Publish to PyPI
+      - name: Publish to PyPI (in an isolated, temporary environment)
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          uv run twine upload dist/*
+          uv tool run twine upload dist/*
