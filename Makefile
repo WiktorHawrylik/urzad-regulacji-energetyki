@@ -11,7 +11,9 @@ help:
 	@echo "  format         - Format code with ruff"
 	@echo "  format-check   - Check code formatting without modifying"
 	@echo "  clean          - Clean build artifacts and caches"
-	@echo "  docs           - Build documentation"
+	@echo "  docs           - Build documentation with MkDocs"
+	@echo "  docs-serve     - Serve documentation locally"
+	@echo "  docs-deploy    - Deploy documentation to GitHub Pages"
 	@echo "  pre-commit     - Install pre-commit hooks"
 
 install:
@@ -54,7 +56,17 @@ clean:
 	find . -type f -name "*.pyc" -delete
 
 docs:
-	uv run sphinx-build -W -b html docs docs/_build/html
+	@echo "Building documentation with MkDocs..."
+	uv run mkdocs build
+
+docs-serve:
+	@echo "Serving documentation locally at http://127.0.0.1:8000"
+	@lsof -ti :8000 | xargs kill -9 2>/dev/null || true
+	uv run mkdocs serve
+
+docs-deploy:
+	@echo "Deploying documentation to GitHub Pages..."
+	uv run mkdocs gh-deploy --force
 
 pre-commit:
 	uv run pre-commit install

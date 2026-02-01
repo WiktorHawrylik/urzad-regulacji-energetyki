@@ -1,6 +1,41 @@
 # Wkład w Projekt
 
-Dziękujemy za zainteresowanie wkładem w ten projekt! Ten dokument opisuje nasz proces i wytyczne.
+Dziękujemy za zainteresowanie wkładem w ten projekt!
+
+## 📚 Pełna Dokumentacja
+
+Kompletny przewodnik dla deweloperów znajduje się w dokumentacji online:
+
+**👉 [Przewodnik Wkładu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/contributing/)**
+
+## 🚀 Szybki Start
+
+```bash
+# 1. Sklonuj repozytorium
+git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
+cd urzad-regulacji-energetyki
+
+# 2. Zainstaluj zależności
+uv sync --extra dev --extra test --extra docs
+
+# 3. Zainstaluj hooki pre-commit
+uv run pre-commit install
+
+# 4. Utwórz feature branch
+git checkout develop
+git checkout -b feature/moja-funkcja
+
+# 5. Wprowadź zmiany, dodaj testy, sprawdź jakość
+make format
+make lint
+make test
+
+# 6. Commit i push
+git commit -m "feat(scope): add new feature"
+git push origin feature/moja-funkcja
+
+# 7. Otwórz Pull Request
+```
 
 ## Nasze Standardy
 
@@ -279,5 +314,15 @@ Przesyłając kod do tego projektu, zgadzasz się na licencjonowanie go na warun
 - Otwórz [GitHub Issue](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/issues)
 - Dołącz do [GitHub Discussions](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/discussions)
 - Wyślij email: wiktor.hawrylik@gmail.com
+
+---
+
+## 📖 Więcej Informacji
+
+Szczegółowe informacje znajdziesz w dokumentacji online:
+
+- **[Pełny Przewodnik Wkładu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/contributing/)** - Kompleksowy przewodnik
+- **[Struktura Projektu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/development/structure/)** - Organizacja kodu
+- **[Narzędzia Deweloperskie](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/development/tools/)** - Konfiguracja i użycie narzędzi
 
 Dziękujemy za wkład! ❤️

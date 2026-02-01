@@ -47,9 +47,10 @@ dev = [
     "types-beautifulsoup4>=4.12.0",
 ]
 docs = [
-    "sphinx>=7.1.0",
-    "sphinx-rtd-theme>=1.3.0",
-    "myst-parser>=2.0.0",
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.24.0",
+    "mike>=2.0.0",
 ]
 test = [
     "pytest>=7.4.0",
@@ -62,7 +63,7 @@ test = [
 [project.urls]
 Homepage = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki"
 Repository = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki"
-Documentation = "https://urzad-regulacji-energetyki.readthedocs.io"
+Documentation = "https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/"
 "Bug Tracker" = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/issues"
 
 [tool.setuptools.packages.find]

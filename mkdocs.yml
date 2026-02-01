@@ -1,0 +1,90 @@
+site_name: Biblioteka Urzędu Regulacji Energetyki
+site_description: Kompleksowa biblioteka Pythona do tworzenia analiz z publicznie dostępnych danych URE
+site_author: Wiktor Hawrylik
+site_url: https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/
+repo_url: https://github.com/WiktorHawrylik/urzad-regulacji-energetyki
+repo_name: WiktorHawrylik/urzad-regulacji-energetyki
+
+theme:
+  name: material
+  language: pl
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Przełącz na tryb ciemny
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Przełącz na tryb jasny
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search:
+      lang: pl
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            members_order: source
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Strona główna: index.md
+  - Przewodnik użytkownika:
+      - Instalacja: guide/installation.md
+      - Szybki start: guide/quickstart.md
+  - Moduły:
+      - Biuletyn Informacji Publicznej: modules/biuletyn.md
+      - Taryfy Energia Elektryczna: modules/taryfy.md
+      - Rejestr MIOZE: modules/mioze.md
+  - API Reference:
+      - Biuletyn: api/biuletyn.md
+      - Taryfy: api/taryfy.md
+      - MIOZE: api/mioze.md
+  - Dla deweloperów:
+      - Wkład w projekt: contributing.md
+      - Struktura projektu: development/structure.md
+      - Narzędzia i konfiguracja: development/tools.md
+  - Licencja: license.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/WiktorHawrylik/urzad-regulacji-energetyki
+  version:
+    provider: mike
