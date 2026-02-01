@@ -223,7 +223,7 @@ Zamiast tox, używamy GitHub Actions matrix:
 ```yaml
 strategy:
   matrix:
-    python-version: ["3.9", "3.10", "3.11", "3.12"]
+    python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 steps:
   - uses: actions/setup-python@v5
     with:
