@@ -9,7 +9,7 @@ Modules:
     - rejestr_mioze: Small renewable energy installations registry (MIOZE)
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Wiktor Hawrylik"
 __email__ = "wiktor.hawrylik@gmail.com"
 __license__ = "GPL-3.0"
