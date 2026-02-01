@@ -46,13 +46,12 @@ jobs:
             - name: Deploy development docs (develop branch)
               if: github.ref == 'refs/heads/develop'
               run: |
-                  uv run mike deploy --push --update-aliases dev development
+                  uv run mike deploy --push --update-aliases dev
 
-            - name: Deploy latest docs (main branch)
+            - name: Deploy main branch docs
               if: github.ref == 'refs/heads/main' && github.event_name == 'push'
               run: |
-                  uv run mike deploy --push --update-aliases latest
-                  uv run mike set-default --push latest
+                  uv run mike deploy --push --update-aliases main
 
             - name: Deploy versioned docs (release)
               if: github.event_name == 'release'
