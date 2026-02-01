@@ -36,7 +36,7 @@ jobs:
 
             - name: Install documentation dependencies
               run: |
-                  uv pip install mkdocs-material mkdocstrings[python] mike
+                  uv sync --extra docs
 
             - name: Configure Git for mike
               run: |
