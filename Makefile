@@ -26,7 +26,7 @@ test:
 	uv run pytest
 
 test-cov:
-	uv run pytest --cov=urzad_regulacji_energetyki --cov-report=html --cov-report=term
+	uv run pytest --cov=python_library_template --cov-report=html --cov-report=term
 
 lint:
 	@echo "Running code quality checks..."

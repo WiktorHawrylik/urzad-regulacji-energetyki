@@ -3,19 +3,19 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "urzad-regulacji-energetyki"
-version = "0.0.3"
-description = "A library for creating insights from publicly available data on the Polish Energy Regulatory Office (URE)"
+name = "python-library-template"
+version = "0.1.0"
+description = "A GPL-licensed Python library template optimized for agentic development."
 readme = "README.md"
 license = "GPL-3.0"
 authors = [
-    { name = "Wiktor Hawrylik", email = "wiktor.hawrylik@gmail.com" }
+    { name = "Your Name", email = "you@example.com" }
 ]
 maintainers = [
-    { name = "Wiktor Hawrylik", email = "wiktor.hawrylik@gmail.com" }
+    { name = "Your Name", email = "you@example.com" }
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
@@ -23,17 +23,10 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 requires-python = ">=3.9"
-dependencies = [
-    "requests>=2.31.0",
-    "beautifulsoup4>=4.12.0",
-    "pandas>=2.0.0",
-    "numpy>=1.24.0",
-    "lxml>=4.9.0",
-    "pydantic>=2.0.0",
-    "python-dateutil>=2.8.0",
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
@@ -43,9 +36,6 @@ dev = [
     "ruff>=0.8.0",
     "mypy>=1.5.0",
     "pre-commit>=3.3.0",
-    "pandas-stubs>=2.0.0",
-    "types-requests>=2.31.0",
-    "types-beautifulsoup4>=4.12.0",
 ]
 docs = [
     "mkdocs>=1.5.0",
@@ -57,24 +47,21 @@ test = [
     "pytest>=7.4.0",
     "pytest-cov>=4.1.0",
     "pytest-xdist>=3.3.0",
-    "pytest-mock>=3.11.0",
-    "responses>=0.23.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki"
-Repository = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki"
-Documentation = "https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/"
-"Bug Tracker" = "https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/issues"
+Homepage = "https://github.com/YOUR_GITHUB_ORG/YOUR_GITHUB_REPO"
+Repository = "https://github.com/YOUR_GITHUB_ORG/YOUR_GITHUB_REPO"
+Documentation = "https://YOUR_GITHUB_ORG.github.io/YOUR_GITHUB_REPO/"
+"Bug Tracker" = "https://github.com/YOUR_GITHUB_ORG/YOUR_GITHUB_REPO/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["urzad_regulacji_energetyki*"]
+include = ["python_library_template*"]
 
 [tool.setuptools.package-dir]
 "" = "src"
 
-# Ruff configuration
 [tool.ruff]
 line-length = 120
 target-version = "py39"
@@ -92,28 +79,22 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-# Enable: pycodestyle errors (E), Pyflakes (F), isort (I), mccabe (C90)
 select = ["E", "F", "I", "C90"]
-# Ignore E203 (whitespace before ':') for Black compatibility
-# W503 is deprecated in ruff (line break before binary operator)
 ignore = ["E203"]
-# Max cyclomatic complexity
 mccabe.max-complexity = 10
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]  # Allow unused imports in __init__.py
+"__init__.py" = ["F401"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["urzad_regulacji_energetyki"]
+known-first-party = ["python_library_template"]
 
 [tool.ruff.format]
-# Use Black-compatible formatting
 quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
 
-# mypy configuration
 [tool.mypy]
 python_version = "3.9"
 warn_return_any = true
@@ -133,13 +114,12 @@ strict_equality = true
 module = "tests.*"
 disallow_untyped_defs = false
 
-# pytest configuration
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = [
     "--strict-markers",
     "--strict-config",
-    "--cov=urzad_regulacji_energetyki",
+    "--cov=python_library_template",
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",
@@ -151,7 +131,6 @@ markers = [
     "unit: marks tests as unit tests",
 ]
 
-# Coverage configuration
 [tool.coverage.run]
 source = ["src"]
 branch = true

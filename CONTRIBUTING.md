@@ -1,328 +1,52 @@
-# Wkład w Projekt
+# Contributing Guide
 
-Dziękujemy za zainteresowanie wkładem w ten projekt!
+Thank you for contributing! This template is optimized for **agentic development** and repeatable workflows.
 
-## 📚 Pełna Dokumentacja
+## Required for all contributors (including bots)
 
-Kompletny przewodnik dla deweloperów znajduje się w dokumentacji online:
+- Read and follow [AGENTS.md](AGENTS.md).
+- Keep changes scoped and documented.
+- Update docs when public APIs change.
+- Run tests or explain why you couldn't.
 
-**👉 [Przewodnik Wkładu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/contributing/)**
-
-## 🚀 Szybki Start
+## Development setup
 
 ```bash
-# 1. Sklonuj repozytorium
-git clone https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
-cd urzad-regulacji-energetyki
-
-# 2. Zainstaluj zależności
+# Install dependencies
 uv sync --extra dev --extra test --extra docs
 
-# 3. Zainstaluj hooki pre-commit
+# Install pre-commit hooks
 uv run pre-commit install
+```
 
-# 4. Utwórz feature branch
-git checkout develop
-git checkout -b feature/moja-funkcja
+## Common commands
 
-# 5. Wprowadź zmiany, dodaj testy, sprawdź jakość
+```bash
 make format
 make lint
 make test
-
-# 6. Commit i push
-git commit -m "feat(scope): add new feature"
-git push origin feature/moja-funkcja
-
-# 7. Otwórz Pull Request
-```
-
-## Nasze Standardy
-
-### Kod
-
-- **Style**: Stosujemy [PEP 8](https://www.python.org/dev/peps/pep-0008/)
-- **Formatowanie i linting**: Używamy [ruff](https://github.com/astral-sh/ruff) do formatowania i lintingu kodu
-- **Type hints**: Wszystkie funkcje publiczne muszą mieć type hints; mypy sprawdza to z opcją `strict`
-- **Testy**: Kod powinien być pokryty testami (minimum 80% pokrycia)
-
-### Zatwierdzenia (Commits)
-
-- Używamy konwencji [Conventional Commits](https://www.conventionalcommits.org/)
-- Format: `<type>(<scope>): <subject>`
-  - **type**: feat, fix, docs, style, refactor, perf, test, chore, ci
-  - **scope**: Opcjonalny, np. `biuletyn`, `taryfy`, `mioze`
-  - **subject**: Imperatywny, małe litery, bez kropki na koniec, maks. 50 znaków
-
-### Przykłady zatwierdzenia
-
-```
-feat(taryfy): add tariff comparison functionality
-fix(biuletyn): handle missing bulletin dates
-docs(readme): update installation instructions
-test(mioze): add registry query tests
-```
-
-## Git Flow
-
-Projekt podąża za strategią [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/):
-
-### Główne gałęzie
-
-- **main**: Produkcja, zawiera tylko wydania
-- **develop**: Narzędzie do integracji, zawiera gotowe funkcje do następnego wydania
-
-### Gałęzie pomocnicze
-
-- **feature/\***: Nowe funkcje
-  - Rozgałęzienie z: `develop`
-  - Scala się z powrotem do: `develop`
-  - Konwencja nazewnictwa: `feature/opisowa-nazwa`
-
-- **bugfix/\***: Poprawki błędów
-  - Rozgałęzienie z: `develop`
-  - Scala się z powrotem do: `develop`
-  - Konwencja nazewnictwa: `bugfix/opisowa-nazwa`
-
-- **release/\***: Przygotowanie wydania
-  - Rozgałęzienie z: `develop`
-  - Scala się z powrotem do: `main` i `develop`
-  - Konwencja nazewnictwa: `release/x.y.z`
-
-- **hotfix/\***: Hotfixy dla produkcji
-  - Rozgałęzienie z: `main`
-  - Scala się z powrotem do: `main` i `develop`
-  - Konwencja nazewnictwa: `hotfix/opisowa-nazwa`
-
-## Proces Wkładu
-
-1. **Fork** repozytorium
-2. **Sklonuj** swój fork:
-   ```bash
-   git clone https://github.com/twoja-nazwa/urzad-regulacji-energetyki.git
-   cd urzad-regulacji-energetyki
-   ```
-
-3. **Dodaj upstream**:
-   ```bash
-   git remote add upstream https://github.com/WiktorHawrylik/urzad-regulacji-energetyki.git
-   ```
-
-4. **Utwórz gałąź funkcji**:
-   ```bash
-   git checkout -b feature/moja-funkcja develop
-   ```
-
-5. **Zainstaluj pre-commit hooks**:
-   ```bash
-   make pre-commit
-   ```
-
-6. **Wprowadź zmiany** i zatwierdzaj regularnie:
-   ```bash
-   git add .
-   git commit -m "feat(modul): description"
-   ```
-
-7. **Pushuj zmiany** do swojego forka:
-   ```bash
-   git push origin feature/moja-funkcja
-   ```
-
-8. **Utwórz Pull Request** na GitHub:
-   - Tytuł: Użyj tego samego formatu co commit message
-   - Opis: Wyjaśnij **co** i **dlaczego**
-   - Referencje: Dodaj numery issues, np. "Fixes #123"
-
-## Wytyczne Pull Request
-
-### Przed wysłaniem
-
-- [ ] Aktualizujesz gałąź z upstreamem: `git pull upstream develop`
-- [ ] Testy przechodzą: `make test`
-- [ ] Kod jest sformatowany: `make format`
-- [ ] Linting przechodzi: `make lint`
-- [ ] Type checking przechodzi: `mypy src`
-- [ ] Changelog jest aktualizowany
-- [ ] Dokumentacja jest aktualizowana
-
-### Wymagania do zatwierdzenia
-
-- [ ] Minimum 2 recenzentów zatwierdza
-- [ ] Wszystkie CI checks przechodzą
-- [ ] Brak konfliktów z `develop`
-- [ ] Pokrycie kodu nie spada
-- [ ] Wszystkie dyskusje są rozwiązane
-
-## Ustawienia Lokalne
-
-### Konfiguracja Narzędzi - Pojedyncze Źródło Prawdy
-
-Projekt używa **`pyproject.toml` jako jedynego źródła konfiguracji** dla wszystkich narzędzi deweloperskich.
-
-#### 📋 Wszystkie reguły w `pyproject.toml`
-
-```toml
-[tool.ruff]           # Formatowanie i linting
-[tool.mypy]           # Sprawdzanie typów
-[tool.pytest.ini_options]  # Testy
-[tool.coverage.run]   # Pokrycie kodu
-```
-
-Wszystkie narzędzia **automatycznie odkrywają** `pyproject.toml` - nie trzeba przekazywać argumentów `--config`.
-
-#### ⚙️ `.vscode/settings.json` - Tylko zachowanie edytora
-
-Minimalna konfiguracja VS Code bez zakodowanych ścieżek:
-
-```json
-{
-  "editor.formatOnSave": true,
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  }
-}
-```
-
-### Uruchamianie Narzędzi
-
-Wszystkie narzędzia uruchamiane przez `uv run`:
-
-```bash
-# Formatowanie i linting
-uv run ruff check --fix .
-uv run ruff format .
-
-# Sprawdzanie typów
-uv run mypy src
-
-# Testy
-uv run pytest
-
-# Lub skróty Makefile
-make format      # Formatuj kod
-make lint        # Sprawdź jakość
-make test        # Uruchom testy
-make test-cov    # Testy z pokryciem
-```
-
-**Dlaczego `uv run`?**
-- Automatycznie używa prawid\u0142owego środowiska wirtualnego
-- 10-100x szybszy niż pip
-- Działa na Windows/Linux/macOS
-- Reprodukowalne instalacje z lockfile
-
-### Setup i Instalacja
-
-```bash
-# Klonowanie
-git clone https://github.com/twoja-nazwa/urzad-regulacji-energetyki.git
-cd urzad-regulacji-energetyki
-
-# Instalacja uv (jeśli nie zainstalowane)
-curl -LsSf https://astral.sh/uv/install.sh | sh  # Linux/macOS
-# Lub: brew install uv  # macOS Homebrew
-
-# Instalacja projektu z wszystkimi zależnościami
-uv sync --extra dev --extra test --extra docs
-
-# Instalacja pre-commit hooks
-uv run pre-commit install
-```
-
-**Co zostanie zainstalowane**:
-- `ruff` - formatowanie i linting (zastępuje black, isort, flake8)
-- `mypy` - sprawdzanie typów
-- `pytest` - testy
-- `pre-commit` - git hooks
-
-
-
-### Komendy Deweloperskie
-
-```bash
-# Uruchom wszystkie testy
-make test
-
-# Uruchom testy z pokryciem
 make test-cov
-
-# Format kodu
-make format
-
-# Sprawdź jakość kodu
-make lint
-
-# Type checking
-mypy src
-
-# Zbuduj dokumentację
 make docs
-
-# Uruchom pre-commit na wszystkich plikach
-make pre-commit
-
-# Czyszczenie artefaktów
-make clean
 ```
 
-## Dodawanie Nowych Modułów
+## Commit conventions
 
-Jeśli dodajesz nowy moduł, upewnij się, że:
+We use **Conventional Commits**:
 
-1. **Struktura folderów**:
-   ```
-   src/urzad_regulacji_energetyki/nowy_modul/
-   ├── __init__.py
-   ├── models.py
-   ├── scrapers.py
-   ├── analyzer.py (lub odpowiadająca główna klasa)
-   └── utils.py
-   ```
+```
+<type>(<scope>): <subject>
+```
 
-2. **Dokumentacja**:
-   - Docstrings w stylu Google
-   - Typ hints dla wszystkich funkcji publicznych
-   - README w folderze modułu
+Examples:
 
-3. **Testy**:
-   ```
-   tests/unit/test_nowy_modul/
-   ├── test_models.py
-   ├── test_scrapers.py
-   ├── test_analyzer.py
-   └── test_utils.py
-   ```
+- `feat(core): add config model`
+- `fix(docs): clarify template checklist`
+- `chore(ci): update workflow`
 
-4. **Rejestracja** w `src/urzad_regulacji_energetyki/__init__.py`
+## Template-specific guidelines
 
-5. **Dokumentacja** w `docs/api/index.rst`
+- Keep the rename checklist accurate.
+- Use placeholders when the real project values are unknown.
+- Document any new tooling in `pyproject.toml` and `README.md`.
 
-## Tłumaczenie i Internacjonalizacja
-
-- **Kod**: Tylko angielski (nazwy zmiennych, funkcji, komentarze techniczne)
-- **Dokumentacja**: Polska (README, CONTRIBUTING, comments dla użytkowników)
-- **Docstrings**: Angielski
-- **Wiadomości Błędów**: Mogą być w angielskim dla spójności technicznej
-
-## Przynależność i Licencje
-
-Przesyłając kod do tego projektu, zgadzasz się na licencjonowanie go na warunkach licencji GPL-3.0.
-
-## Pytania?
-
-- Otwórz [GitHub Issue](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/issues)
-- Dołącz do [GitHub Discussions](https://github.com/WiktorHawrylik/urzad-regulacji-energetyki/discussions)
-- Wyślij email: wiktor.hawrylik@gmail.com
-
----
-
-## 📖 Więcej Informacji
-
-Szczegółowe informacje znajdziesz w dokumentacji online:
-
-- **[Pełny Przewodnik Wkładu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/contributing/)** - Kompleksowy przewodnik
-- **[Struktura Projektu](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/development/structure/)** - Organizacja kodu
-- **[Narzędzia Deweloperskie](https://wiktorhawrylik.github.io/urzad-regulacji-energetyki/development/tools/)** - Konfiguracja i użycie narzędzi
-
-Dziękujemy za wkład! ❤️
+By contributing, you agree that your work is licensed under GPL-3.0.
