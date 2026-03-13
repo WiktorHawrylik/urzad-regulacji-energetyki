@@ -22,7 +22,6 @@ jobs:
         uses: astral-sh/setup-uv@v4
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
 
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
@@ -39,7 +38,7 @@ jobs:
         run: uv run mypy src
 
       - name: Run tests with pytest
-        run: uv run pytest --cov=urzad_regulacji_energetyki --cov-report=xml --cov-report=term
+        run: uv run pytest --cov=python_library_template --cov-report=xml --cov-report=term
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
